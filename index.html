@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yatzy Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Yatzy Game</h1>
+    </header>
+    <main>
+        <div id="play-area">
+            <div id="dice-container">
+                <!-- Dice will be displayed here -->
+            </div>
+            <button id="roll-button">Roll Dice</button>
+        </div>
+        <div id="scoreboard">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Score rows will be dynamically generated here -->
+                    <tr>
+                        <td>Ones</td>
+                        <td id="score-ones">0</td>
+                    </tr>
+                    <tr>
+                        <td>Twos</td>
+                        <td id="score-twos">0</td>
+                    </tr>
+                    <tr>
+                        <td>Threes</td>
+                        <td id="score-threes">0</td>
+                    </tr>
+                    <tr>
+                        <td>Fours</td>
+                        <td id="score-fours">0</td>
+                    </tr>
+                    <tr>
+                        <td>Fives</td>
+                        <td id="score-fives">0</td>
+                    </tr>
+                    <tr>
+                        <td>Sixes</td>
+                        <td id="score-sixes">0</td>
+                    </tr>
+                    <tr>
+                        <td>Three of a Kind</td>
+                        <td id="score-three-of-a-kind">0</td>
+                    </tr>
+                    <tr>
+                        <td>Four of a Kind</td>
+                        <td id="score-four-of-a-kind">0</td>
+                    </tr>
+                    <tr>
+                        <td>Full House</td>
+                        <td id="score-full-house">0</td>
+                    </tr>
+                    <tr>
+                        <td>Small Straight</td>
+                        <td id="score-small-straight">0</td>
+                    </tr>
+                    <tr>
+                        <td>Large Straight</td>
+                        <td id="score-large-straight">0</td>
+                    </tr>
+                    <tr>
+                        <td>Yatzy</td>
+                        <td id="score-yatzy">0</td>
+                    </tr>
+                    <tr>
+                        <td>Chance</td>
+                        <td id="score-chance">0</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total Score</td>
+                        <td id="total-score">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Richa and Fay</p>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>

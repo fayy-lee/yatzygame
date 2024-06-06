@@ -1,0 +1,82 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+header, footer {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 1em 0;
+}
+
+#play-area, #scoreboard {
+    margin: 1em 0;
+    padding: 1em;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.die {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.die.selected {
+    background-color: #ddd;
+    border-color: #000;
+}
+
+#roll-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#roll-button:hover {
+    background-color: #555;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tfoot {
+    font-weight: bold;
+}
