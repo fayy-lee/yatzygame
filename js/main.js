@@ -1,39 +1,54 @@
-let dice = [0, 0, 0, 0, 0];
-let rollsLeft = 3;
-let selectedDice = [false, false, false, false, false];
-let scores = {
-    ones: 0,
-    twos: 0,
-    threes: 0,
-    fours: 0,
-    fives: 0,
-    sixes: 0,
-    threeOfAKind: 0,
-    fourOfAKind: 0,
-    fullHouse: 0,
-    smallStraight: 0,
-    largeStraight: 0,
-    yatzy: 0,
-    chance: 0,
-    total: 0
-};
-
 document.addEventListener('DOMContentLoaded', () => {
     renderDice();
     document.getElementById('roll-button').addEventListener('click', rollDice);
     renderScoreboard();
 });
 
+function startGame() {
+    fetch('/api/game.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'start_game' })
+    }).then(response => response.json())
+      .then(data => updateGameState(data));
+}
+
 function rollDice() {
-    if (rollsLeft > 0) {
-        for (let i = 0; i < dice.length; i++) {
-            if (!selectedDice[i]) {
-                dice[i] = Math.floor(Math.random() * 6) + 1;
-            }
-        }
-        rollsLeft--;
-        renderDice();
-    }
+    fetch('/api/game.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'roll_dice' })
+    }).then(response => response.json())
+      .then(data => updateGameState(data));
+}
+
+function toggleSelectDie(index) {
+    fetch('/api/game.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'toggle_select_die', index: index })
+    }).then(response => response.json())
+      .then(data => updateGameState(data));
+}
+
+function calculateScores() {
+    fetch('/api/game.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'calculate_scores' })
+    }).then(response => response.json())
+      .then(data => updateGameState(data));
+}
+
+function updateGameState(data) {
+    const { game, leaderboard } = data;
+    dice = game.dice;
+    rollsLeft = game.rollsLeft;
+    selectedDice = game.selectedDice;
+    scores = game.scores;
+    renderDice();
+    renderScoreboard();
+    renderLeaderboard(leaderboard);
 }
 
 function renderDice() {
@@ -48,11 +63,6 @@ function renderDice() {
     });
 }
 
-function toggleSelectDie(index) {
-    selectedDice[index] = !selectedDice[index];
-    renderDice();
-}
-
 function renderScoreboard() {
     for (const [key, value] of Object.entries(scores)) {
         const scoreElement = document.getElementById(`score-${key}`);
@@ -62,14 +72,7 @@ function renderScoreboard() {
     }
 }
 
-function calculateScores() {
-    // Calculate and update the scores for each category
-    scores.ones = dice.filter(die => die === 1).length * 1;
-    scores.twos = dice.filter(die => die === 2).length * 2;
-    scores.threes = dice.filter(die => die === 3).length * 3;
-    scores.fours = dice.filter(die => die === 4).length * 4;
-    scores.fives = dice.filter(die => die === 5).length * 5;
-    scores.sixes = dice.filter(die => die === 6).length * 6;
-    scores.total = Object.values(scores).reduce((total, num) => total + num, 0);
-    renderScoreboard();
+function renderLeaderboard(leaderboard) {
+    const leaderboardContainer = document.getElementById('leaderboard-container');
+    leaderboardContainer.innerHTML = leaderboard.map(score => `<p>${score}</p>`).join('');
 }
