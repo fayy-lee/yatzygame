@@ -1,82 +1,133 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
 }
 
-header, footer {
-    background-color: #333;
-    color: #fff;
-    width: 100%;
+header {
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
     text-align: center;
-    padding: 1em 0;
+    width: 100%;
 }
 
-#play-area, #scoreboard {
-    margin: 1em 0;
-    padding: 1em;
-    background-color: #fff;
-    border-radius: 8px;
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+#play-area {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#dice-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .die {
-    display: inline-block;
     width: 50px;
     height: 50px;
-    margin: 10px;
+    font-size: 20px;
     text-align: center;
     line-height: 50px;
-    font-size: 20px;
-    border: 1px solid #333;
+    border: 2px solid #343a40;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #eee;
+    background-color: #f8f9fa;
 }
 
 .die.selected {
-    background-color: #ddd;
-    border-color: #000;
+    background-color: #343a40;
+    color: white;
 }
 
 #roll-button {
     display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #333;
-    color: #fff;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    margin: 10px 0;
+    background-color: #007bff;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 #roll-button:hover {
-    background-color: #555;
+    background-color: #0056b3;
 }
 
-table {
+#scoreboard {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#scoreboard table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 }
 
-th, td {
-    border: 1px solid #333;
+#scoreboard th, #scoreboard td {
+    border: 1px solid #343a40;
     padding: 10px;
     text-align: center;
 }
 
-th {
-    background-color: #f4f4f4;
+#leaderboard {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
 }
 
-tfoot {
-    font-weight: bold;
+#leaderboard h2 {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+#leaderboard-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#leaderboard-list li {
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #343a40;
+    border-radius: 5px;
+    text-align: center;
+}
+
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }

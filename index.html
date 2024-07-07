@@ -11,92 +11,34 @@
         <h1>Yatzy Game</h1>
     </header>
     <main>
-        <div id="play-area">
-            <div id="dice-container">
-                <!-- Dice will be displayed here -->
-            </div>
+        <section id="game-section">
+            <div id="dice-container"></div>
             <button id="roll-button">Roll Dice</button>
-        </div>
-        <div id="scoreboard">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ones</td>
-                        <td id="score-ones">0</td>
-                    </tr>
-                    <tr>
-                        <td>Twos</td>
-                        <td id="score-twos">0</td>
-                    </tr>
-                    <tr>
-                        <td>Threes</td>
-                        <td id="score-threes">0</td>
-                    </tr>
-                    <tr>
-                        <td>Fours</td>
-                        <td id="score-fours">0</td>
-                    </tr>
-                    <tr>
-                        <td>Fives</td>
-                        <td id="score-fives">0</td>
-                    </tr>
-                    <tr>
-                        <td>Sixes</td>
-                        <td id="score-sixes">0</td>
-                    </tr>
-                    <tr>
-                        <td>Three of a Kind</td>
-                        <td id="score-three-of-a-kind">0</td>
-                    </tr>
-                    <tr>
-                        <td>Four of a Kind</td>
-                        <td id="score-four-of-a-kind">0</td>
-                    </tr>
-                    <tr>
-                        <td>Full House</td>
-                        <td id="score-full-house">0</td>
-                    </tr>
-                    <tr>
-                        <td>Small Straight</td>
-                        <td id="score-small-straight">0</td>
-                    </tr>
-                    <tr>
-                        <td>Large Straight</td>
-                        <td id="score-large-straight">0</td>
-                    </tr>
-                    <tr>
-                        <td>Yatzy</td>
-                        <td id="score-yatzy">0</td>
-                    </tr>
-                    <tr>
-                        <td>Chance</td>
-                        <td id="score-chance">0</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td>Total Score</td>
-                        <td id="total-score">0</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <div id="leaderboard">
+            <button id="calculate-scores-button">Calculate Scores</button>
+            <p id="roll-result">Rolls left: 3</p>
+        </section>
+        <section id="score-section">
+            <h2>Scores</h2>
+            <p>Ones: <span id="score-ones">0</span></p>
+            <p>Twos: <span id="score-twos">0</span></p>
+            <p>Threes: <span id="score-threes">0</span></p>
+            <p>Fours: <span id="score-fours">0</span></p>
+            <p>Fives: <span id="score-fives">0</span></p>
+            <p>Sixes: <span id="score-sixes">0</span></p>
+            <p>Three of a Kind: <span id="score-three-of-a-kind">0</span></p>
+            <p>Four of a Kind: <span id="score-four-of-a-kind">0</span></p>
+            <p>Full House: <span id="score-full-house">0</span></p>
+            <p>Small Straight: <span id="score-small-straight">0</span></p>
+            <p>Large Straight: <span id="score-large-straight">0</span></p>
+            <p>Yatzy: <span id="score-yatzy">0</span></p>
+            <p>Chance: <span id="score-chance">0</span></p>
+            <p>Total: <span id="score-total">0</span></p>
+        </section>
+        <section id="leaderboard-section">
             <h2>Leaderboard</h2>
-            <div id="leaderboard-container">
-                <!-- Leaderboard scores will be displayed here -->
-            </div>
-        </div>
+            <ul id="leaderboard-list"></ul>
+        </section>
     </main>
-    <footer>
-        <p>&copy; 2024 Richa and Fay</p>
-    </footer>
     <script src="js/main.js"></script>
 </body>
 </html>

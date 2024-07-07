@@ -1,78 +1,97 @@
 document.addEventListener('DOMContentLoaded', () => {
-    renderDice();
-    document.getElementById('roll-button').addEventListener('click', rollDice);
-    renderScoreboard();
+    document.getElementById('roll-button').addEventListener('click', () => {
+        fetch('api/game.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ action: 'roll_dice' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateGameState(data);
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    document.getElementById('calculate-scores-button').addEventListener('click', () => {
+        fetch('api/game.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ action: 'calculate_scores' })
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateGameState(data);
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+    // Initial fetch to get the game state when the page loads
+    fetch('api/game.php')
+        .then(response => response.json())
+        .then(data => {
+            updateGameState(data);
+        })
+        .catch(error => console.error('Error:', error));
 });
 
-function startGame() {
-    fetch('/api/game.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'start_game' })
-    }).then(response => response.json())
-      .then(data => updateGameState(data));
-}
-
-function rollDice() {
-    fetch('/api/game.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'roll_dice' })
-    }).then(response => response.json())
-      .then(data => updateGameState(data));
-}
-
-function toggleSelectDie(index) {
-    fetch('/api/game.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'toggle_select_die', index: index })
-    }).then(response => response.json())
-      .then(data => updateGameState(data));
-}
-
-function calculateScores() {
-    fetch('/api/game.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'calculate_scores' })
-    }).then(response => response.json())
-      .then(data => updateGameState(data));
-}
-
 function updateGameState(data) {
-    const { game, leaderboard } = data;
-    dice = game.dice;
-    rollsLeft = game.rollsLeft;
-    selectedDice = game.selectedDice;
-    scores = game.scores;
-    renderDice();
-    renderScoreboard();
-    renderLeaderboard(leaderboard);
-}
+    console.log('Updating game state:', data);
 
-function renderDice() {
+    // Update dice display
     const diceContainer = document.getElementById('dice-container');
     diceContainer.innerHTML = '';
-    dice.forEach((die, index) => {
-        const dieElement = document.createElement('div');
-        dieElement.className = `die ${selectedDice[index] ? 'selected' : ''}`;
+    data.game.dice.forEach((die, index) => {
+        const dieElement = document.createElement('button');
+        dieElement.className = `die ${data.game.selectedDice[index] ? 'selected' : ''}`;
         dieElement.textContent = die;
         dieElement.addEventListener('click', () => toggleSelectDie(index));
         diceContainer.appendChild(dieElement);
     });
+
+    // Update roll info
+    document.getElementById('roll-result').textContent = `Rolls left: ${data.game.rollsLeft}`;
+
+    // Update scoreboard
+    document.getElementById('score-ones').textContent = data.game.scores.ones;
+    document.getElementById('score-twos').textContent = data.game.scores.twos;
+    document.getElementById('score-threes').textContent = data.game.scores.threes;
+    document.getElementById('score-fours').textContent = data.game.scores.fours;
+    document.getElementById('score-fives').textContent = data.game.scores.fives;
+    document.getElementById('score-sixes').textContent = data.game.scores.sixes;
+    document.getElementById('score-three-of-a-kind').textContent = data.game.scores.threeOfAKind;
+    document.getElementById('score-four-of-a-kind').textContent = data.game.scores.fourOfAKind;
+    document.getElementById('score-full-house').textContent = data.game.scores.fullHouse;
+    document.getElementById('score-small-straight').textContent = data.game.scores.smallStraight;
+    document.getElementById('score-large-straight').textContent = data.game.scores.largeStraight;
+    document.getElementById('score-yatzy').textContent = data.game.scores.yatzy;
+    document.getElementById('score-chance').textContent = data.game.scores.chance;
+    document.getElementById('score-total').textContent = data.game.scores.total;
+
+    // Update leaderboard
+    const leaderboardList = document.getElementById('leaderboard-list');
+    leaderboardList.innerHTML = '';
+    data.leaderboard.forEach(score => {
+        const listItem = document.createElement('li');
+        listItem.textContent = score;
+        leaderboardList.appendChild(listItem);
+    });
 }
 
-function renderScoreboard() {
-    for (const [key, value] of Object.entries(scores)) {
-        const scoreElement = document.getElementById(`score-${key}`);
-        if (scoreElement) {
-            scoreElement.textContent = value;
-        }
-    }
-}
-
-function renderLeaderboard(leaderboard) {
-    const leaderboardContainer = document.getElementById('leaderboard-container');
-    leaderboardContainer.innerHTML = leaderboard.map(score => `<p>${score}</p>`).join('');
+function toggleSelectDie(index) {
+    fetch('api/game.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ action: 'toggle_select_die', index })
+    })
+    .then(response => response.json())
+    .then(data => {
+        updateGameState(data);
+    })
+    .catch(error => console.error('Error:', error));
 }
