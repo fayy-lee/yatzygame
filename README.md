@@ -15,7 +15,7 @@ This repository hosts a single-player Yatzy game enhanced with server-side PHP f
 - **Leaderboard:** Tracks top scores across sessions using PHP sessions.
 
 ## Screenshots
-- [Google Drive Link for Screenshots](https://drive.google.com/drive/folders/<your-folder-id>](https://drive.google.com/drive/folders/1BrQ_cSf1a3bvMO2glGDTYB6gcy-zZ0_q))
+- [Google Drive Link for Screenshots](https://drive.google.com/drive/folders/1BrQ_cSf1a3bvMO2glGDTYB6gcy-zZ0_q)
 
 ## Setup and Usage
 1. **Clone Repository:**
